@@ -88,9 +88,18 @@ function getAllData(req, res) {
     // let obj=seedUser();
     // res.send(obj);
     let email = req.query.email;
-    favModel.findOne({ email: email }, (erorr, user) => {
+    favModel.findOne({ email: email }, (error, user) => {
+        if(error){
+            res.send(error)
+        }else if(user===null){
+            user= new favModel({
+                email:req.body.email,
+                data:[]
+            })
+        }
+
         res.send(user.data);
-        console.log(user.data);
+        
     })
 
 }
@@ -103,6 +112,15 @@ function creatFav(req, res) {
     } = req.body;
 
     favModel.findOne({email:email},(error,user)=>{
+
+        if(error){
+            res.send(error)
+        }else if(user===null){
+            user= new favModel({
+                email:req.body.email,
+                data:[]
+            })
+        }
 
         const newFav={
             name:name,
@@ -135,6 +153,7 @@ function deleteData(req, res) {
 // Update Function
 
 function updateData  (req, res)  {
+    console.log(req.body);
     const id = req.params.id;
     const {
         email, name, img, level
