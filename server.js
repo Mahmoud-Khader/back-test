@@ -10,10 +10,10 @@ const { default: axios } = require('axios');
 require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 // mongoose.connect('mongodb://localhost:27017/Digimon', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('mongodb+srv://mahmoud:mahmoud123456789@cluster0.gt8fb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.get('/', (req, res) => {
-    res.send('hello m3lem')
+    res.send('hello Razan')
 })
 app.listen(PORT, () => {
     console.log(`${PORT} ahamd wa7sh`);
